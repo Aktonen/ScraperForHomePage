@@ -31,8 +31,9 @@ def update_data():
     scraped_data = get_scraped_data()
 
     try:
-        # Create a new document with the data
-        db.collection("news").document().set(scraped_data)
+        for item in scraped_data:
+            # Add each news item to Firestore
+            db.collection("news").document().set(item)
         return "Data saved successfully", 200
     except Exception as e:
         # Log the error for better debugging
