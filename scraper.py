@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import json
 # import csv
 
 # Set up the Selenium webdriver
@@ -38,23 +37,21 @@ next_element = headline.find_next_sibling()
 # Filter the titles
 titles = next_element.select('a[href*="/fi/uutiset/"]')
 
-texts = []
-links = []
-
-# Loop through the titles and get the headlines and links in the titles
-for title in titles:
-    title_text = title.get_text()
-    title_links = title.get('href')
-
-    if title_text:
-        texts.append(title_text)
-
-    if title_links not in links:
-        links.append(title_links)
-
 def get_scraped_data():
-    data = {"titles": texts, "links": links}
-    return data
+    scraped_data = []
+
+    # Loop through the titles and get the headlines and links in the titles
+    for title in titles:
+        title_text = title.get_text()
+        title_links = title.get('href')
+
+        if title_text:
+            data = {"link": title_links, "text": title_text}
+            scraped_data.append(data)
+
+    return scraped_data
+
+get_scraped_data()
 
 # THIS SOLUTION DISABLED
 # We use another solution to save the data to a variable and send it to the app.py
