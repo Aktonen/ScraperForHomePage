@@ -42,13 +42,13 @@ links = []
 
 # Loop through the titles and get the headlines and links in the titles
 for title in titles:
-    title_links = title.get('href')
     title_text = title.get_text()
+    title_links = title.get('href')
 
     if title_text:
         texts.append(title_text)
 
-    if title_links:
+    if title_links not in links:
         links.append(title_links)
 
 # Open and write the results in to the file
