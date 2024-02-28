@@ -1,6 +1,7 @@
 from flask import Flask, request
 import firebase_admin
 from firebase_admin import firestore
+from scraper import get_scraped_data
 
 # Initialize Firebase app
 cred = firebase_admin.credentials.Certificate("db.json")
@@ -27,7 +28,7 @@ def get_data():
 @app.route("/update_data", methods=["POST"])
 def update_data():
     # Get data from request
-    scraped_data = request.get_json()
+    scraped_data = get_scraped_data()
 
     try:
         # Create a new document with the data

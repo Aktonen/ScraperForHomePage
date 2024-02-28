@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import json
 # import csv
 
 # Set up the Selenium webdriver
@@ -51,6 +52,9 @@ for title in titles:
     if title_links not in links:
         links.append(title_links)
 
+def get_scraped_data():
+    data = {"titles": texts, "links": links}
+    return data
 
 # THIS SOLUTION DISABLED
 # We use another solution to save the data to a variable and send it to the app.py
