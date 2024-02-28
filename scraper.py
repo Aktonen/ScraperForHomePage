@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import csv
+# import csv
 
 # Set up the Selenium webdriver
 driver = webdriver.Chrome()  # You may need to download the appropriate driver for your browser
@@ -51,12 +51,16 @@ for title in titles:
     if title_links not in links:
         links.append(title_links)
 
+
+# THIS SOLUTION DISABLED
+# We use another solution to save the data to a variable and send it to the app.py
+
 # Open and write the results in to the file
-file = open("scraped_links.csv", "w", encoding="utf-8")
-writer = csv.writer(file)
+# file = open("scraped_links.csv", "w", encoding="utf-8")
+# writer = csv.writer(file)
 
-writer.writerow(["HEADLINES", "LINKS"])
+# writer.writerow(["HEADLINES", "LINKS"])
 
-for title_text, title_link in zip(texts, links):
-    writer.writerow([title_text, title_link])
-file.close()
+# for title_text, title_link in zip(texts, links):
+#     writer.writerow([title_text, title_link])
+# file.close()
