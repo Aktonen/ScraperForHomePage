@@ -52,7 +52,7 @@ for title in titles:
         links.append(title_links)
 
 # Open and write the results in to the file
-file = open("scraped_links.csv", "w")
+file = open("scraped_links.csv", "w", encoding="utf-8")
 writer = csv.writer(file)
 
 writer.writerow(["HEADLINES", "LINKS"])
