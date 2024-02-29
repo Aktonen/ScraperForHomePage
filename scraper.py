@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import re
 # import csv
 
 # Set up the Selenium webdriver
@@ -37,16 +38,20 @@ next_element = headline.find_next_sibling()
 # Filter the titles
 titles = next_element.select('a[href*="/fi/uutiset/"]')
 
+# Find the dates of the news
+dates = next_element.find_all(class_=re.compile("metaDate"))
+
 def get_scraped_data():
     scraped_data = []
 
-    # Loop through the titles and get the headlines and links in the titles
-    for title in titles:
+    # Loop through the titles and date to get the headlines,links and date in the titles
+    for title, date in zip(titles, dates):
         title_text = title.get_text()
         title_links = title.get('href')
+        title_date = date.get_text()
 
         if title_text:
-            data = {"link": title_links, "text": title_text}
+            data = {"link": title_links, "text": title_text, "date": title_date}
             scraped_data.append(data)
 
     return scraped_data
