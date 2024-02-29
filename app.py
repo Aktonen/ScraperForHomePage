@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask
 import firebase_admin
 from firebase_admin import firestore
 from scraper import get_scraped_data
