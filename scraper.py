@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
-# import csv
 
 # Set up the Selenium webdriver
 driver = webdriver.Chrome()  # You may need to download the appropriate driver for your browser
@@ -41,16 +40,6 @@ titles = next_element.find_all(class_=re.compile("listItem"))
 def get_scraped_data():
     scraped_data = []
 
-    # Loop through the titles and date to get the headlines,links and date in the titles
-    # for title in titles:
-    #     title_text = title.get_text()
-    #     title_links = title.get('href')
-
-    #     if title_text:
-    #         data = {"link": title_links, "text": title_text, "date": title_date}
-    #         scraped_data.append(data)
-
-
     for title in titles:
         title_text = title.find_all("span")
         title_link = title.find_all("a")
@@ -73,16 +62,3 @@ def get_scraped_data():
     return cleaned_data
 
 get_scraped_data()
-
-# THIS SOLUTION DISABLED
-# We use another solution to save the data to a variable and send it to the app.py
-
-# Open and write the results in to the file
-# file = open("scraped_links.csv", "w", encoding="utf-8")
-# writer = csv.writer(file)
-
-# writer.writerow(["HEADLINES", "LINKS"])
-
-# for title_text, title_link in zip(texts, links):
-#     writer.writerow([title_text, title_link])
-# file.close()
