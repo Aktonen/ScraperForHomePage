@@ -36,25 +36,41 @@ headline = soup.select_one('h3:-soup-contains("Kurinpito")')
 next_element = headline.find_next_sibling()
 
 # Filter the titles
-titles = next_element.select('a[href*="/fi/uutiset/"]')
-
-# Find the dates of the news
-dates = next_element.find_all(class_=re.compile("metaDate"))
+titles = next_element.find_all(class_=re.compile("listItem"))
 
 def get_scraped_data():
     scraped_data = []
 
     # Loop through the titles and date to get the headlines,links and date in the titles
-    for title, date in zip(titles, dates):
-        title_text = title.get_text()
-        title_links = title.get('href')
-        title_date = date.get_text()
+    # for title in titles:
+    #     title_text = title.get_text()
+    #     title_links = title.get('href')
 
-        if title_text:
-            data = {"link": title_links, "text": title_text, "date": title_date}
+    #     if title_text:
+    #         data = {"link": title_links, "text": title_text, "date": title_date}
+    #         scraped_data.append(data)
+
+
+    for title in titles:
+        title_text = title.find_all("span")
+        title_link = title.find_all("a")
+        title_date = title.find_all(class_=re.compile("metaDate"))
+
+        for text, link, date in zip(title_text, title_link, title_date):
+            cleaned_title_text = text.get_text()
+            cleaned_link = link.get("href")
+            cleaned_date = date.get_text()
+            data = {"text": cleaned_title_text, "link": cleaned_link, "date": cleaned_date}
             scraped_data.append(data)
 
-    return scraped_data
+    cleaned_data = []
+
+    for data in scraped_data:
+        if data not in cleaned_data:
+            cleaned_data.append(data)
+
+    print(cleaned_data)
+    return cleaned_data
 
 get_scraped_data()
 
