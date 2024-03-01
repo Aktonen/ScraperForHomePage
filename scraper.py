@@ -10,7 +10,7 @@ import re
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
 # Set up the Selenium webdriver
-driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+driver = webdriver.Chrome(options=options)
 
 # Load the page
 url = "https://liiga.fi/fi/uutiset?kategoria=kurinpito"
