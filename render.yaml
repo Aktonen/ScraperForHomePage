@@ -1,0 +1,3 @@
+buildpacks:
+  - [ "render-python", "v1" ]
+  - [ "https://github.com/render-apps/render-chromedriver", "v1" ]

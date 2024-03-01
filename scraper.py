@@ -1,3 +1,4 @@
+import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -5,8 +6,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
 
+
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")
 # Set up the Selenium webdriver
-driver = webdriver.Chrome()  # You may need to download the appropriate driver for your browser
+driver = webdriver.Chrome(options=options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
 
 # Load the page
 url = "https://liiga.fi/fi/uutiset?kategoria=kurinpito"
