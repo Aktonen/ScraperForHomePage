@@ -3,3 +3,4 @@ beautifulsoup4
 selenium
 gunicorn
 firebase_admin
+os
