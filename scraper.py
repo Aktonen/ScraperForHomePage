@@ -58,7 +58,6 @@ def get_scraped_data():
         if data not in cleaned_data:
             cleaned_data.append(data)
 
-    print(cleaned_data)
     return cleaned_data
 
 get_scraped_data()
