@@ -15,10 +15,16 @@ def update_data():
     # Get data from request
     scraped_data = get_scraped_data()
 
+    query = db.collection("news")
+
     try:
         for item in scraped_data:
-            # Add each news item to Firestore
-            db.collection("news").document().set(item)
+            # Check if the item's "link" already exists in the collection
+            existing_item = query.where("link", "==", item["link"]).get()
+
+            if not existing_item:  # If no existing item found, add the new one
+                db.collection("news").add(item)
+
         return "Data saved successfully", 200
     except Exception as e:
         # Log the error for better debugging
