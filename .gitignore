@@ -1,3 +1,4 @@
 scraped_links.csv
 db.json
 __pycache__
+config.py
