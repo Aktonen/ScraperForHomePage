@@ -3,3 +3,4 @@ beautifulsoup4
 selenium
 firebase_admin
 Flask-CORS
+gunicorn
