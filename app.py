@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import firebase_admin
 from firebase_admin import firestore
 from scraper import get_scraped_data
@@ -13,7 +14,10 @@ app = Flask(__name__)
 
 API_KEY = os.environ.get('API_KEY')
 
+CORS(app, origins=["http://localhost:3000"])
+
 @app.route("/update_data", methods=["POST"])
+@cross_origin(origins=["http://localhost:3000"]) 
 def update_data():
 
     if request.headers.get('Authorization') != API_KEY:
